@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: dev
+  # 将返回的时间类型转换格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  application:
+    name: mybatis-druid
+server:
+  # port和servlet-context-path打jar才生效
+  port: 8081
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.qiaohx.mybatisdruid.model
