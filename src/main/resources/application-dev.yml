@@ -8,6 +8,7 @@ spring:
     url: jdbc:mysql://118.24.212.141:3306/test?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai  # 数据库连接地址
     username: test                                  # 数据库用户名
     password: q0183117307                           # 数据库连接密码
+    filters: com.alibaba.druid.filter.stat.StatFilter # 开启SQL监控
     dbcp2:                                          # 进行数据库连接池的配置
       min-idle: 5                                   # 数据库连接池的最小维持连接数
       initial-size: 5                               # 初始化提供的连接数

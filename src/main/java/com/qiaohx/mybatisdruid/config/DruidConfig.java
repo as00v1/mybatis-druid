@@ -1,5 +1,6 @@
 package com.qiaohx.mybatisdruid.config;
 
+import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
@@ -26,10 +27,23 @@ public class DruidConfig {
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean() ;
+
         filterRegistrationBean.setFilter(new WebStatFilter());
         filterRegistrationBean.addUrlPatterns("/*"); // 所有请求进行监控处理
         filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.css,/druid/*");
+        filterRegistrationBean.addInitParameter("slowSqlMillis", "1");
+        filterRegistrationBean.addInitParameter("logSlowSql", "true");
+
         return filterRegistrationBean ;
+    }
+
+    @Bean
+    public StatFilter statFilterBean() {
+//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        StatFilter s = new StatFilter();
+        s.setSlowSqlMillis(1);
+        s.setLogSlowSql(true);
+        return s;
     }
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
